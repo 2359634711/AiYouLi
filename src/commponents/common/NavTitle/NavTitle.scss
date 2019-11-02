@@ -1,0 +1,32 @@
+.navTitle {
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.navItem {
+  flex-grow: 1;
+  margin: 0 100px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.navItem::after {
+  content: "";
+  height: 0;
+  transition: all 0.1s;
+}
+
+.activeItem::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 15px;
+  width: 100%;
+  border-radius: 100px;
+  background: rgb(255, 172, 19);
+}

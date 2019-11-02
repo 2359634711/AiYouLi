@@ -28,6 +28,10 @@ const config = {
   },
   copy: {
     patterns: [
+      {
+        from: 'src/icon',
+        to: 'dist/icon'
+      }
     ],
     options: {
     }

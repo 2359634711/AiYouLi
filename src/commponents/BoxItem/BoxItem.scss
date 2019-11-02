@@ -1,0 +1,14 @@
+.BoxItem {
+  border-radius: 50px;
+  margin: 20px;
+  padding: 0 20px;
+  min-height: 100px;
+  background: linear-gradient(90deg, var(--backColor), var(--backColor1));
+  box-shadow: 2px 2px 20px 0px var(--backColor1);
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}

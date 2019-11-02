@@ -1,0 +1,28 @@
+.mainBox {
+  height: 500px;
+  background: #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.score {
+  font-size: 80px;
+  font-weight: bold;
+}
+.scoreTitle {
+  font-size: 36px;
+  margin-left: 20px;
+}
+
+.checkInBtn{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    background: #ffa631;
+    border-radius: 100px;
+    padding: 5px 20px;
+    font-size: 24px;
+}

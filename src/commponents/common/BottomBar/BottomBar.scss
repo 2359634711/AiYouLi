@@ -1,0 +1,14 @@
+.bottomBar{
+    position: fixed;
+    bottom: 20px;
+    border-radius: 50px;
+    box-shadow: 2px 2px 10px 0 #ffc47d;
+    width: auto;
+    left: 20px;
+    right:20px;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}

@@ -1,8 +1,13 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import './index.scss'
+import BoxItem from '../../commponents/BoxItem/BoxItem';
+import BottomBar from '../../commponents/common/BottomBar/BottomBar'
 
-export default class Index extends Component {
+interface IState {
+
+}
+export default class Index extends Component<any, IState> {
 
   /**
    * 指定config的类型声明为: Taro.Config
@@ -15,20 +20,54 @@ export default class Index extends Component {
     navigationBarTitleText: '首页'
   }
 
-  componentWillMount () { }
+  componentWillMount() { }
 
-  componentDidMount () { }
+  componentDidMount() { }
 
-  componentWillUnmount () { }
+  componentWillUnmount() { }
 
-  componentDidShow () { }
+  componentDidShow() { }
 
-  componentDidHide () { }
+  componentDidHide() { }
 
-  render () {
+  render() {
     return (
       <View className='index'>
-        <Text>Hello world!</Text>
+        <View className='mainBox'>
+          <View className='scoreBox'>
+            <Text className='score'>195</Text>
+            <Text className='scoreTitle'>分</Text>
+          </View>
+          <View className='checkInBtn'>签到</View>
+        </View>
+        <View className='BtnList'>
+          {/* <View onClick={() => {
+            console.log('asd')
+            Taro.navigateTo({
+              url: '/pages/dailyTask/dailyTask'
+            })
+          }}>
+            <BoxItem colorS='ffa631' colorE='ffc477'>每日任务</BoxItem>
+          </View> */}
+          {/* <BoxItem colorS='ffa631' colorE='ffc477'>愿望清单</BoxItem> */}
+          <View onClick={() => {
+            console.log('asd')
+            Taro.navigateTo({
+              url: '/pages/inProgessTask/inProgessTask'
+            })
+          }}>
+            <BoxItem colorS='ffa631' colorE='ffc477'>任务列表</BoxItem>
+          </View>
+          <View onClick={() => {
+            Taro.navigateTo({
+              url: '/pages/pointMall/pointMall'
+            })
+          }}>
+            <BoxItem colorS='ffa631' colorE='ffc477'>积分兑换</BoxItem>
+          </View>
+        </View>
+
+        <BottomBar />
       </View>
     )
   }
