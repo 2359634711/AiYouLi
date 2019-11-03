@@ -1,0 +1,69 @@
+.TitleBox {
+  height: 300px;
+  width: 100%;
+  background: linear-gradient(#ffa631, #f6f6f6);
+  overflow: hidden;
+  position: fixed;
+  z-index: -1;
+}
+.title {
+  color: #fff;
+  margin: 10px 20px;
+  font-weight: bold;
+  font-size: 40px;
+}
+.status {
+  color: #fff;
+  margin: 10px 20px;
+  font-size: 28px;
+}
+
+.mainBox {
+  position: absolute;
+  min-height: 100%;
+  top: 150px;
+}
+page {
+  background: #f6f6f6;
+}
+.btnBar {
+  position: fixed;
+  height: 120px;
+  box-shadow: 0 0 20px 6px #ddd;
+  bottom: 0px;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  background: #fff;
+}
+.AtCardBox {
+  border-radius: 40px 40px 0 0;
+  width: 100%;
+  background: #fff;
+  padding: 80px 0px;
+}
+.btnBar > View {
+  min-width: 140px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+.btnCancel {
+  background: #eee;
+  color: #666;
+}
+.btnPrimery {
+  background: #ffa631;
+  color: #fff;
+}
+
+.AtListBox {
+  background: #fff;
+  margin-top: 20px;
+  overflow: hidden;
+}

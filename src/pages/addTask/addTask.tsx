@@ -2,16 +2,20 @@ import { View } from "@tarojs/components";
 import Taro, { Config } from "@tarojs/taro";
 import { AtInput, AtButton, AtTextarea } from 'taro-ui';
 import './addTask.scss'
-export interface IState {
-    formData: {
-        title: string,
-        info: string,
-        type: string,
-        price: string
-    }
+export interface ITask {
+    id?: string,
+    title: string,
+    info: string,
+    type?: string,//?
+    price: string,
+    status?: number//状态 -1 0 1 2 3 
+}
+
+interface IState {
+    formData: ITask
 }
 export default class addTask extends Taro.Component<any, IState>{
-    config:Config = {
+    config: Config = {
         navigationBarTitleText: '添加任务'
     }
     constructor(props) {
@@ -20,7 +24,7 @@ export default class addTask extends Taro.Component<any, IState>{
             formData: {
                 title: '',
                 info: '',
-                type: '',
+                type: '',//?
                 price: ''
             }
         }

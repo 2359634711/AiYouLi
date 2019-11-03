@@ -2,7 +2,7 @@
   "miniprogramRoot": "./dist",
   "projectname": "AiYouLi",
   "description": "给爱情加点料",
-  "appid": "touristappid",
+  "appid": "wx405e32cc5f494606",
   "setting": {
     "urlCheck": true,
     "es6": false,

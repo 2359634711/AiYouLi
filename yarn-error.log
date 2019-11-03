@@ -1,5 +1,5 @@
 Arguments: 
-  F:\nodejs\node.exe D:\nodejs\npm_global_modules\node_modules\yarn\bin\yarn.js add NavTitle.scss --silent --no-progress
+  F:\nodejs\node.exe D:\nodejs\npm_global_modules\node_modules\yarn\bin\yarn.js add src/commponents/common/BottomBar/BottomBar --silent --no-progress
 
 PATH: 
   F:\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;F:\myworkpace\2019\aiyouli\AiYouLi\node_modules\.bin;F:\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;F:\myworkpace\2019\aiyouli\AiYouLi\node_modules\.bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;F:\nodejs\;F:\Git\cmd;D:\nodejs\npm_global_modules;C:\WINDOWS\System32\OpenSSH\;F:\jdk1.8.0_73\bin;F:\myworkpace\android_studio\androidSdk\sdk\platform-tools;F:\myworkpace\android_studio\androidSdk\sdk\tools;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Roaming\npm;C:\Users\Administrator\AppData\Local\Programs\Microsoft VS Code\bin;F:\patch\flutter\bin;
@@ -14,8 +14,8 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.npmjs.org/NavTitle.scss: Not found
-      at Request.params.callback [as _callback] (D:\nodejs\npm_global_modules\node_modules\yarn\lib\cli.js:66830:18)
+  Error: https://registry.npmjs.org/src%2fcommponents/common/BottomBar/BottomBar: Request "https://registry.npmjs.org/src%2fcommponents/common/BottomBar/BottomBar" returned a 405
+      at Request.params.callback [as _callback] (D:\nodejs\npm_global_modules\node_modules\yarn\lib\cli.js:66839:18)
       at Request.self.callback (D:\nodejs\npm_global_modules\node_modules\yarn\lib\cli.js:140464:22)
       at Request.emit (events.js:198:13)
       at Request.<anonymous> (D:\nodejs\npm_global_modules\node_modules\yarn\lib\cli.js:141436:10)

@@ -1,5 +1,5 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View, Text, Image } from '@tarojs/components'
 import './index.scss'
 import BoxItem from '../../commponents/BoxItem/BoxItem';
 import BottomBar from '../../commponents/common/BottomBar/BottomBar'
@@ -34,13 +34,44 @@ export default class Index extends Component<any, IState> {
     return (
       <View className='index'>
         <View className='mainBox'>
+          <Image mode='aspectFill' src='/icon/bg.png' className='bgImg' />
           <View className='scoreBox'>
             <Text className='score'>195</Text>
             <Text className='scoreTitle'>分</Text>
           </View>
           <View className='checkInBtn'>签到</View>
         </View>
+
+
+        <View className='progressBox'>
+          <View className='progressTitleBox'>
+            <View className='left'>
+              35%
+            </View>
+            <View className='right'>
+              65%
+            </View>
+          </View>
+          <View className='progressBarBox'>
+
+            <View className='barBack'>
+              <View className='barG' style={{ width: '35%' }}>
+
+              </View>
+              <View className='barBlock'>
+                Vs
+              </View>
+              <View className='barB'>
+
+              </View>
+            </View>
+          </View>
+        </View>
+
+
+
         <View className='BtnList'>
+
           {/* <View onClick={() => {
             console.log('asd')
             Taro.navigateTo({
@@ -67,7 +98,7 @@ export default class Index extends Component<any, IState> {
           </View>
         </View>
 
-        <BottomBar />
+        <BottomBar selectedIndex={0} />
       </View>
     )
   }

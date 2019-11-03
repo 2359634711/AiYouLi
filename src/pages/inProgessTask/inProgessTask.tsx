@@ -3,9 +3,13 @@ import { View } from "@tarojs/components";
 import './inProgessTask.scss'
 import { AtListItem, AtList } from "taro-ui";
 import NavTitle, { INavTitle } from '../../commponents/common/NavTitle/Navtitle'
+import { ITask } from "../addTask/addTask";
 
 interface IState {
-    navTitle: INavTitle
+    navTitle: INavTitle,
+    taskList: ITask[],
+    statusStr: any,
+    thumbStr: any
 }
 
 export default class inProgessTask extends Taro.Component<any, IState> {
@@ -28,11 +32,56 @@ export default class inProgessTask extends Taro.Component<any, IState> {
                         })
                     })
                 }
+            },
+            taskList: [{
+                id: '0',
+                title: '捏腿',
+                info: 'asd',
+                price: '100',
+                status: 0
+            }, {
+                id: '0',
+                title: '捏腿',
+                info: 'asd',
+                price: '100',
+                status: -1
+            }, {
+                id: '0',
+                title: '捏腿',
+                info: 'asd',
+                price: '100',
+                status: 1
+            }, {
+                id: '0',
+                title: '捏腿',
+                info: 'asd',
+                price: '100',
+                status: 2
+            }, {
+                id: '0',
+                title: '捏腿',
+                info: 'asd',
+                price: '100',
+                status: 3
+            }],
+            statusStr: {
+                '-1': '已拒绝',
+                0: '未接受',
+                1: '进行中',
+                2: '完成申请中',
+                3: '已完成'
+            },
+            thumbStr: {
+                '-1': '/icon/fail.png',
+                0: '/icon/request.png',
+                1: '/icon/request.png',
+                2: '/icon/request.png',
+                3: '/icon/succ.png'
             }
         }
     }
     render() {
-        let { navTitle } = this.state;
+        let { navTitle, statusStr, taskList, thumbStr } = this.state;
         return (
             <View className=''>
                 <NavTitle
@@ -40,44 +89,24 @@ export default class inProgessTask extends Taro.Component<any, IState> {
                     activeIndex={navTitle.activeIndex}
                     onNavChange={navTitle.onNavChange}
                 />
-
-                <AtList>
-                    <AtListItem
-                        title='买水果'
-                        extraText='未接受'
-                        note='100积分'
-                        arrow='right'
-                        thumb='/icon/request.png'
-                    />
-                    <AtListItem
-                        title='捏腿'
-                        extraText='进行中'
-                        arrow='right'
-                        note='200积分'
-                        thumb='/icon/request.png'
-                    />
-                    <AtListItem
-                        title='骑脖梗梗'
-                        arrow='right'
-                        extraText='完成申请中'
-                        note='300积分'
-                        thumb='/icon/request.png'
-                    />
-                    <AtListItem
-                        title='买早餐'
-                        extraText='已完成'
-                        arrow='right'
-                        note='300积分'
-                        thumb='/icon/succ.png'
-                    />
-                    <AtListItem
-                        title='取快递'
-                        extraText='已拒绝'
-                        arrow='right'
-                        note='50积分'
-                        thumb='/icon/fail.png'
-                    />
-                </AtList>
+                <View className='mainBox'>
+                    <AtList>
+                        {taskList.map(val => {
+                            let status = val.status || 0;
+                            return <AtListItem onClick={() => {
+                                Taro.navigateTo({
+                                    url: '/pages/taskDetail/taskDetail?taskId=' + val.id
+                                })
+                            }}
+                                title={val.title}
+                                extraText={statusStr[status]}
+                                note={val.price + '积分'}
+                                arrow='right'
+                                thumb={thumbStr[status]}
+                            />
+                        })}
+                    </AtList>
+                </View>
             </View>
         )
     }

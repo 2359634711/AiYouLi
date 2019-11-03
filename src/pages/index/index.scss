@@ -1,12 +1,24 @@
 .mainBox {
   height: 500px;
-  background: #ccc;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
-
+.bgImg {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  filter: blur(25px);
+  top: 0;
+}
+.scoreBox {
+  color: #ffa631;
+  // background: rgba(0, 0, 0, 0.486);
+  // box-shadow: 0 0 100px 100px rgba(0, 0, 0, 0.486);
+}
 .score {
   font-size: 80px;
   font-weight: bold;
@@ -16,13 +28,85 @@
   margin-left: 20px;
 }
 
-.checkInBtn{
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: #fff;
-    background: #ffa631;
-    border-radius: 100px;
-    padding: 5px 20px;
-    font-size: 24px;
+.checkInBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #fff;
+  background: #ffa631;
+  border-radius: 100px;
+  padding: 5px 20px;
+  font-size: 24px;
+}
+.BtnList {
+  margin: 20px 20px 0 20px;
+  border-radius: 40px;
+  background: #fff;
+  padding: 20px;
+}
+
+.progressBarBox {
+  position: relative;
+  display: flex;
+  width: calc(100% - 40px);
+  margin: 0 20px;
+}
+.barBack {
+  height: 18px;
+  position: relative;
+  width: 100%;
+  top: 50%;
+  margin-top: -5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.barBlock {
+  width: 60px;
+  height: 60px;
+  margin-right: -30px;
+  margin-left: -30px;
+  border-radius: 50%;
+  color: #fff;
+  background: #ffa631;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 38px;
+}
+.barG {
+  background: red;
+  height: 100%;
+  border-radius: 100px;
+}
+.barB {
+  background: blue;
+  height: 100%;
+  border-radius: 100px;
+  flex-grow: 1;
+}
+
+.progressTitleBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: calc(100% - 40px);
+  margin: 0 20px;
+}
+
+.progressBox {
+  border-radius: 40px;
+  margin: -30px 20px 0px 20px;
+  background: #fff;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+page {
+  background: #f5f5f5;
 }
