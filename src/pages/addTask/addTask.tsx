@@ -2,6 +2,7 @@ import { View } from "@tarojs/components";
 import Taro, { Config } from "@tarojs/taro";
 import { AtInput, AtButton, AtTextarea } from 'taro-ui';
 import './addTask.scss'
+import { insertTask } from '../../api/api'
 export interface ITask {
     id?: string,
     title: string,
@@ -9,6 +10,9 @@ export interface ITask {
     type?: string,//?
     price: string,
     status?: number//状态 -1 0 1 2 3 
+    createid?: string,
+    targetid?: string,
+    create_time?: string
 }
 
 interface IState {
@@ -29,8 +33,21 @@ export default class addTask extends Taro.Component<any, IState>{
             }
         }
     }
-    onSubmit(event) {
-        console.log(event)
+    onSubmit() {
+        let { formData } = this.state;
+        let createid = Taro.getStorageSync('openid')
+        let targetid = Taro.getStorageSync('targetid')
+        formData = {
+            ...formData,
+            createid,
+            targetid
+        }
+        insertTask(formData).then(res => {
+            console.log(res)
+            Taro.navigateBack({
+                delta: 1
+            })
+        })
     }
     handleTextareaChange(event) {
         let info = event.detail.value;

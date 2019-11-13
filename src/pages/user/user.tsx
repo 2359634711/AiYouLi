@@ -3,21 +3,40 @@ import { View, Button, Image } from "@tarojs/components";
 import BottomBar from "../../commponents/common/BottomBar/BottomBar";
 import './user.scss'
 import { AtList, AtListItem } from "taro-ui";
-import { auth } from '../../api/api'
+import { auth, getUserInfo } from '../../api/api'
 
-interface IState {
+export interface IUserInfo {
     openid: string,
     avatarUrl: string,
     gender: string,
     nickName: string,
-    price: string,
+    price: number,
     targetid: string
+}
+interface IState {
+    userInfo: IUserInfo,
+    targetObj?: IUserInfo
 }
 export default class user extends Taro.Component<any, IState> {
     constructor(props) {
         super(props);
         this.state = {
-            ...Taro.getStorageSync('userInfo')
+            userInfo: {
+                openid: '',
+                avatarUrl: '',
+                gender: '',
+                nickName: '',
+                price: 0,
+                targetid: ''
+            },
+            targetObj: {
+                openid: '',
+                avatarUrl: '',
+                gender: '',
+                nickName: '',
+                price: 0,
+                targetid: ''
+            }
         }
     }
     config: Config = {
@@ -38,14 +57,15 @@ export default class user extends Taro.Component<any, IState> {
         }
     }
     componentDidMount() {
-        let that = this;
-        Taro.getSetting({
-            success(res) {
-                if (res.authSetting['scope.userInfo']) {
-                    that.login()
-                }
-            }
-        })
+        if (Taro.getStorageSync('openid'))
+            getUserInfo().then(res => {
+                console.log(res.data)
+                this.setState({
+                    ...res.data
+                })
+                Taro.setStorageSync('openid', res.data.userInfo.openid)
+                Taro.setStorageSync('targetid', res.data.userInfo.targetid)
+            })
     }
     login(userInfo?) {
         Taro.login({
@@ -57,13 +77,10 @@ export default class user extends Taro.Component<any, IState> {
                         userInfo
                     }).then(res => {
                         console.log(res)
-                        let { openid, avatarUrl, gender, nickName } = res.data.data
-                        Taro.setStorageSync('openid', openid)
+                        Taro.setStorageSync('openid', res.data.userInfo.openid)
+                        Taro.setStorageSync('targetid', res.data.userInfo.targetid)
                         this.setState({
-                            openid,
-                            avatarUrl,
-                            gender,
-                            nickName
+                            ...res.data
                         })
                     })
                 } else {
@@ -73,7 +90,7 @@ export default class user extends Taro.Component<any, IState> {
         })
     }
     render() {
-        let { openid, avatarUrl, nickName, price, targetid } = this.state;
+        let { openid, avatarUrl, nickName, price, targetid } = this.state.userInfo;
         openid = openid || Taro.getStorageSync('openid');
 
         return (
@@ -94,11 +111,17 @@ export default class user extends Taro.Component<any, IState> {
 
                 <View className='mainBox'>
                     <AtList>
-                        <AtListItem
-                            title='绑定对象'
-                            extraText={targetid || '点击绑定'}
-                            arrow='right'
-                        />
+                        <View onClick={() => {
+                            Taro.navigateTo({
+                                url: '/pages/user/bind/bind'
+                            })
+                        }}>
+                            <AtListItem
+                                title='绑定对象'
+                                extraText={targetid || '点击绑定'}
+                                arrow='right'
+                            />
+                        </View>
                         <AtListItem
                             title='完成任务'
                             extraText='32个'

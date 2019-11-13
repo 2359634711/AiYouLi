@@ -25,7 +25,8 @@ class App extends Component {
       'pages/pointMall/pointMall',
       'pages/addTask/addTask',
       'pages/user/user',
-      'pages/taskDetail/taskDetail'
+      'pages/taskDetail/taskDetail',
+      'pages/user/bind/bind'
     ],
     window: {
       backgroundTextStyle: 'light',

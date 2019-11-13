@@ -5,7 +5,7 @@ import './NavTitle.scss'
 export interface INavTitle {
     titleList: string[],
     activeIndex: number,
-    onNavChange: Function
+    onNavChange?: Function
 }
 export default class Navtitle extends Taro.Component<INavTitle, any>{
 
@@ -16,8 +16,8 @@ export default class Navtitle extends Taro.Component<INavTitle, any>{
                 {titleList.map((val, i) => {
                     return <View onClick={() => {
                         console.log(i)
-                        onNavChange(i)
-                    }} key={val} className={(i == activeIndex ? 'activeItem' : '')+' navItem'}>{val}</View>
+                        onNavChange ? onNavChange(i) : ''
+                    }} key={val} className={(i == activeIndex ? 'activeItem' : '') + ' navItem'}>{val}</View>
                 })}
             </View>
         )

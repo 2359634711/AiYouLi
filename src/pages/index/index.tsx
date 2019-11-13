@@ -3,12 +3,34 @@ import { View, Text, Image } from '@tarojs/components'
 import './index.scss'
 import BoxItem from '../../commponents/BoxItem/BoxItem';
 import BottomBar from '../../commponents/common/BottomBar/BottomBar'
-
+import { getUserInfo } from '../../api/api'
+import { IUserInfo } from '../user/user';
 interface IState {
-
+  userInfo: IUserInfo,
+  targetObj: IUserInfo
 }
 export default class Index extends Component<any, IState> {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInfo: {
+        openid: '',
+        avatarUrl: '',
+        gender: '',
+        nickName: '',
+        price: 0,
+        targetid: ''
+      },
+      targetObj: {
+        openid: '',
+        avatarUrl: '',
+        gender: '',
+        nickName: '',
+        price: 0,
+        targetid: ''
+      }
+    }
+  }
   /**
    * 指定config的类型声明为: Taro.Config
    *
@@ -22,7 +44,13 @@ export default class Index extends Component<any, IState> {
 
   componentWillMount() { }
 
-  componentDidMount() { }
+  componentDidMount() {
+    getUserInfo().then(res => {
+      this.setState({
+        ...res.data
+      })
+    })
+  }
 
   componentWillUnmount() { }
 
@@ -31,12 +59,23 @@ export default class Index extends Component<any, IState> {
   componentDidHide() { }
 
   render() {
+    let { userInfo, targetObj } = this.state;
+    if (!targetObj) targetObj = {
+      openid: '',
+      avatarUrl: '',
+      gender: '',
+      nickName: '',
+      price: 1,
+      targetid: ''
+    }
+    let userPercent = Math.floor((userInfo.price / (userInfo.price + targetObj.price)) * 100);
+    let targetPercent = 100 - userPercent;
     return (
       <View className='index'>
         <View className='mainBox'>
           <Image mode='aspectFill' src='/icon/bg.png' className='bgImg' />
           <View className='scoreBox'>
-            <Text className='score'>195</Text>
+            <Text className='score'>{userInfo.price}</Text>
             <Text className='scoreTitle'>分</Text>
           </View>
           <View className='checkInBtn'>签到</View>
@@ -46,16 +85,28 @@ export default class Index extends Component<any, IState> {
         <View className='progressBox'>
           <View className='progressTitleBox'>
             <View className='left'>
-              35%
+              <View className='userInfoBox'>
+                <View className='userBox'>
+                  <Image src={userInfo.avatarUrl} className='userImg' />
+                  <View className='userPrecent'>{userInfo.openid ? (userPercent + '%') : '未登录'}</View>
+                  {/* <View className='userName'>{userInfo.nickName}</View> */}
+                  {/* <View className='userPrice'>{userInfo.price}</View> */}
+                </View>
+              </View>
             </View>
             <View className='right'>
-              65%
+              <View className='userBox'>
+                <Image src={targetObj.avatarUrl} className='userImg' />
+                <View className='userPrecent'>{targetObj.openid ? (targetPercent + '%') : '暂无'}</View>
+                {/* <View className='userName'>{targetObj.nickName}</View> */}
+                {/* <View className='userPrice'>{targetObj.price}</View> */}
+              </View>
             </View>
           </View>
           <View className='progressBarBox'>
 
             <View className='barBack'>
-              <View className='barG' style={{ width: '35%' }}>
+              <View className='barG' style={{ width: (userPercent || 50) + '%' }}>
 
               </View>
               <View className='barBlock'>
