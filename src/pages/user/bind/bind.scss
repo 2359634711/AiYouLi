@@ -58,12 +58,13 @@
   margin: 20px;
   width: 90%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 .btnBox > at-button {
-  flex-grow: 1;
+  width: 100%;
+  margin: 10px;
 }
 .userItem {
   width: 200px;

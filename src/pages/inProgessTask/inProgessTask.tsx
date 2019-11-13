@@ -9,7 +9,8 @@ interface IState {
     navTitle: INavTitle,
     taskList: ITask[],
     statusStr: any,
-    thumbStr: any
+    thumbStr: any,
+    page: number
 }
 
 export default class inProgessTask extends Taro.Component<any, IState> {
@@ -19,6 +20,7 @@ export default class inProgessTask extends Taro.Component<any, IState> {
     constructor(props) {
         super(props);
         this.state = {
+            page: 0,
             navTitle: {
                 titleList: [
                     '我发布的',
@@ -50,29 +52,46 @@ export default class inProgessTask extends Taro.Component<any, IState> {
         this.setState({
             navTitle: Object.assign({}, this.state.navTitle, {
                 activeIndex: i
-            })
+            }),
+            taskList: [],
+            page: 0
+        }, () => {
+            this.getTaskList()
         })
 
-        this.selectTask(i)
     }
-    selectTask(type) {
+    // selectTask(type) {
+    //     this.setState(Object.assign(
+    //         this.state,
+    //         {
+    //         }
+    //     ))
+    //     this.getTaskList()
+    // }
+    onReachBottom() {
+        this.getTaskList()
+    }
+    getTaskList() {
         selectTask({
-            type,
+            type: this.state.navTitle.activeIndex,
+            page: this.state.page,
             openid: Taro.getStorageSync('openid')
         }).then(res => {
+            console.log(res)
             this.setState(Object.assign(
                 this.state,
                 {
-                    taskList: res.data
+                    taskList: [...this.state.taskList, ...res.data],
+                    page: this.state.page + 1
                 }
             ))
         })
     }
-    componentDidMount() {
-        this.selectTask(this.state.navTitle.activeIndex)
-    }
+    // componentDidMount() {
+    //     this.getTaskList()
+    // }
     componentDidShow() {
-        this.selectTask(this.state.navTitle.activeIndex)
+        this.bindNavChange(this.state.navTitle.activeIndex)
     }
     render() {
         let { navTitle, statusStr, taskList, thumbStr } = this.state;
@@ -87,17 +106,22 @@ export default class inProgessTask extends Taro.Component<any, IState> {
                     <AtList>
                         {taskList.map(val => {
                             let status = val.status || 0;
-                            return <AtListItem onClick={() => {
-                                Taro.navigateTo({
-                                    url: '/pages/taskDetail/taskDetail?taskId=' + val.id + '&type=' + navTitle.activeIndex
-                                })
-                            }}
-                                title={val.title}
-                                extraText={statusStr[status]}
-                                note={val.price + '积分'}
-                                arrow='right'
-                                thumb={thumbStr[status]}
-                            />
+                            return (
+                                <View className='taskItem' key={val.create_time}>
+                                    <View className='taskTime'>{val.create_time && val.create_time.split('.')[0]}</View>
+                                    <AtListItem onClick={() => {
+                                        Taro.navigateTo({
+                                            url: '/pages/taskDetail/taskDetail?taskId=' + val.id + '&type=' + navTitle.activeIndex
+                                        })
+                                    }}
+                                        title={val.title}
+                                        extraText={statusStr[status]}
+                                        note={val.price + '积分'}
+                                        arrow='right'
+                                        thumb={thumbStr[status]}
+                                    />
+                                </View>
+                            )
                         })}
                     </AtList>
                 </View>

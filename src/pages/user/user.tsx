@@ -112,9 +112,16 @@ export default class user extends Taro.Component<any, IState> {
                 <View className='mainBox'>
                     <AtList>
                         <View onClick={() => {
-                            Taro.navigateTo({
-                                url: '/pages/user/bind/bind'
-                            })
+                            if (!targetid)
+                                Taro.navigateTo({
+                                    url: '/pages/user/bind/bind'
+                                })
+                            else
+                                Taro.showToast({
+                                    title: '您已经绑定过了',
+                                    icon: 'none',
+                                    duration: 2000
+                                })
                         }}>
                             <AtListItem
                                 title='绑定对象'

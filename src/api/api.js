@@ -40,6 +40,7 @@ const getBindInfo = data => quest('/bind/getBindInfo', data)
 const createBind = data => quest('/bind/createBind', data)
 const deleteBind = data => quest('/bind/deleteBind', data)
 const resolveBind = data => quest('/bind/resolveBind', data)
+const bindAction = data => quest('/bind/bind', data)
 
 export {
     auth,
@@ -52,5 +53,6 @@ export {
     getBindInfo,
     createBind,
     deleteBind,
-    resolveBind
+    resolveBind,
+    bindAction
 }

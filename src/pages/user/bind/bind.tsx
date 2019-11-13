@@ -7,7 +7,8 @@ import {
     getBindInfo,
     createBind,
     deleteBind,
-    resolveBind
+    resolveBind,
+    bindAction
 } from '../../../api/api'
 import { IUserInfo } from "../user";
 export interface IBindCard {
@@ -63,6 +64,30 @@ export default class bind extends Taro.Component<any, IState>{
             }
         })
 
+    }
+    bindAction() {
+        let { bindCard } = this.state;
+        if (!bindCard) {
+            Taro.showToast({
+                title: '卡片不存在',
+                icon: 'none',
+                duration: 2000
+            })
+            return
+        }
+        bindAction({
+            createid: bindCard.createid,
+            targetid: bindCard.targetid
+        }).then(res => {
+            console.log(res)
+            if (res.err) {
+                return
+            } else {
+                Taro.navigateBack({
+                    delta: 2
+                })
+            }
+        })
     }
     componentDidMount() {
         this.getBindInfo();
@@ -226,7 +251,7 @@ export default class bind extends Taro.Component<any, IState>{
 
 
                             {create == 1 && <View className='btnBox'>
-                                {status == 1 && <AtButton type='primary'>绑定</AtButton>}
+                                {status == 1 && <AtButton type='primary' onClick={this.bindAction.bind(this)}>绑定</AtButton>}
                                 <AtButton type='secondary' onClick={this.deleteBind.bind(this)}>删除卡片</AtButton>
                             </View>}
                             {create == 0 && <View className='btnBox'>
